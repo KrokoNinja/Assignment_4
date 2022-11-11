@@ -10,4 +10,8 @@ public class Kitchen extends Room{
     public boolean switchStove(){
         return stove = !stove;
     }
+
+    public boolean stoveState() {
+        return stove;
+    }
 }

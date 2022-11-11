@@ -25,4 +25,8 @@ public class Bathroom extends Room {
         }
         return shower = !shower;
     }
+
+    public boolean showerState() {
+        return shower;
+    }
 }
