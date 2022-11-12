@@ -19,14 +19,33 @@ public class Bathroom extends Room {
         else {
             Date timer = new Date();
             res = (int) (timer.getTime() - water);
-            double seconds = res / 10;
-            long consumed = res * 200;
-            System.out.println("The shower was on for " + seconds + " seconds. You consumed " + consumed + " water.");
+            double seconds = res / 1000;
+            long consumed = (long) seconds * 200;
+            System.out.println("You switched off the shower.");
+            System.out.println("The shower was on for " + seconds + " seconds. You consumed " + consumed + " milliliters water. \n");
         }
         return shower = !shower;
     }
 
     public boolean showerState() {
         return shower;
+    }
+
+    @Override
+    public String enteringMsg() {
+        return super.enteringMsg() + "4) Switch shower\n";
+    }
+
+    @Override
+    public void userInput(String input) {
+        if ("4".equals(input)) {
+            if (switchShower()) {
+                System.out.println("You switched on the shower.\n");
+            }
+            this.enter();
+        }
+        else {
+            super.userInput(input);
+        }
     }
 }

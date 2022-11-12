@@ -17,14 +17,17 @@ public class Room {
         System.out.println(enteringMsg());
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
+        userInput(input);
     }
 
     protected String enteringMsg() {
-        return String.format("You are in the %s. \n" +
-                "What do you want to do? \n" +
-                "1) Switch light\n"+
-                "2) Leave room\n"+
-                "3) Enter neighbouring room\n", this.getName());
+        return String.format("""
+                You are in the %s.\s
+                What do you want to do?\s
+                1) Switch light
+                2) Leave room
+                3) Enter neighbouring room
+                """, this.getName());
     }
 
     protected void userInput(String input) {
@@ -40,7 +43,7 @@ public class Room {
                 this.switchRoom();
                 break;
             default:
-                System.out.println("Invalid input! Try again!");
+                System.out.println("Invalid input! Try again!\n");
                 this.enter();
                 break;
         }
@@ -48,12 +51,22 @@ public class Room {
 
     public boolean switchLight(){
         if(!lighting) {
-            System.out.println("You switched the light on.");
+            System.out.println("You switched the light on. \n");
         }
         else {
-            System.out.println("You switched the light off.");
+            System.out.println("You switched the light off. \n");
         }
         return lighting = !lighting;
+    }
+
+    public void addNeighbor(Room neighbor) {
+        for (Room room : neighbors){
+            if (room.getName().equals(neighbor.getName())){
+                return;
+            }
+        }
+        neighbors.add(neighbor);
+        neighbor.neighbors.add(this);
     }
 
     private void switchRoom() {
@@ -64,7 +77,7 @@ public class Room {
             neighbors.get(input).enter();               //Entering neighbour room
         }
         else {
-            System.out.println("Invalid input range");
+            System.out.println("Invalid input range \n");
         }
         this.enter();                                   //After leaving neighbour room coming back to previous room
     }

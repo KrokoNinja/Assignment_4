@@ -33,14 +33,45 @@ public class Apartment {
         Rooms.add(newRoom);
     }
 
+    public Room getRoomByName(String name) {
+        for (Object room: Rooms) {
+            if (((Room) room).getName().equals(name)) {
+                return (Room) room;
+            }
+        }
+        return null;
+    }
+
     /**
      * Check if lights, stove or shower are still switched on by leaving.
      */
     private void checkApartment() {
         for (Object room:
              Rooms) {
-            room = (Room) room;
+            if (room.getClass() == Room.class) {
+                if (((Room) room).lightState()) {
+                    this.printWarning(((Room) room).getName(), "Light");
+                }
+            } else if (room.getClass() == Kitchen.class) {
+                if(((Kitchen) room).lightState()) {
+                    this.printWarning(((Kitchen) room).getName(), "Light");
+                }
+                if (((Kitchen) room).stoveState()) {
+                    this.printWarning(((Kitchen) room).getName(), "Stove");
+                }
+            } else if (room.getClass() == Bathroom.class) {
+                if(((Bathroom) room).lightState()) {
+                    this.printWarning(((Bathroom) room).getName(), "Light");
+                }
+                if (((Bathroom) room).showerState()) {
+                    this.printWarning(((Bathroom) room).getName(), "Shower");
+                }
+            }
 
         }
+    }
+
+    private void printWarning(String room, String error) {
+        System.out.printf("Warning: %s in the %s is still switched on.%n", error, room);
     }
 }
