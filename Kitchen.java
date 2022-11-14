@@ -1,3 +1,5 @@
+// Yannik Seidel 1080202332811 Ludovico Ferrara 108020222205 Lennert Pfundtner 108020228802
+//Gruppe C3
 public class Kitchen extends Room{
 
     //Fields
