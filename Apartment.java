@@ -33,6 +33,11 @@ public class Apartment {
         Rooms.add(newRoom);
     }
 
+    /**
+     * Return room with given name
+     * @param name
+     * @return Room
+     */
     public Room getRoomByName(String name) {
         for (Object room: Rooms) {
             if (((Room) room).getName().equals(name)) {
@@ -71,6 +76,11 @@ public class Apartment {
         }
     }
 
+    /**
+     * Print warning message when light, stove or shower are still switched on in a room
+     * @param room name of the room
+     * @param error what ist on (light, stove, shower)
+     */
     private void printWarning(String room, String error) {
         System.out.printf("Warning: %s in the %s is still switched on.%n", error, room);
     }
